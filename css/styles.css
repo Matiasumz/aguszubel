@@ -963,6 +963,15 @@ ul {
   box-shadow: var(--shadow-soft);
   transform: translateY(-2px);
 }
+@media (max-width: 960px) {
+  .nav__logo {
+    font-size: 1rem;
+  }
+
+  .nav__list {
+    display: none;
+  }
+}
 
 /* ── 13. Footer ── */
 .footer {
