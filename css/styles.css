@@ -113,7 +113,7 @@ ul {
 
 .nav__logo {
   font-family: var(--font-serif);
-  font-size: 1.3rem;
+  font-size: 1.7rem;
   font-weight: 600;
   color: var(--color-aqua-dark);
   letter-spacing: 0.02em;
@@ -316,7 +316,7 @@ ul {
 
 .hero__subtitle {
   font-family: var(--font-serif);
-  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-size: clamp(1rem, 2vw, 1.5rem);
   font-weight: 300;
   font-style: italic;
   color: var(--color-text-mid);
