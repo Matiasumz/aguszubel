@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>Portfolio · Agustina Zubeldia</title>
+  <meta name="description" content="Portfolio de trabajos de Agustina Zubeldia — Community Manager & Content Strategist." />
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="Portfolio · Agustina Zubeldia" />
+  <meta property="og:description" content="Trabajos seleccionados en social media, copywriting y estrategia de contenidos." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:image"       content="assets/slide1.jpg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Shared styles -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+
+  <style>
+    /* ── Portfolio page specific styles ── */
+
+    .pf-nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 4rem;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(94, 207, 191, 0.15);
+      animation: fadeDown 0.8s ease forwards;
+    }
+
+    .pf-nav__logo {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--color-aqua-dark);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+
+    .pf-nav__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-mid);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .pf-nav__back:hover { color: var(--color-aqua-dark); }
+
+    /* Hero banner */
+    .pf-hero {
+      padding: 9rem 4rem 4rem;
+      background: var(--color-off-white);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pf-hero::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, var(--color-aqua-light) 0%, transparent 70%);
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    .pf-hero__eyebrow {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-aqua-dark);
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.3s forwards;
+    }
+
+    .pf-hero__title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 300;
+      color: var(--color-text);
+      line-height: 1.1;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.5s forwards;
+    }
+
+    .pf-hero__title em {
+      font-style: italic;
+      color: var(--color-aqua-dark);
+    }
+
+    .pf-hero__desc {
+      font-size: 1rem;
+      color: var(--color-text-mid);
+      max-width: 500px;
+      margin: 1.2rem auto 0;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.7s forwards;
+    }
+
+    /* Download bar */
+    .pf-download {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      padding: 1.5rem 4rem;
+      background: var(--color-white);
+      border-bottom: 1px solid rgba(94, 207, 191, 0.15);
+    }
+
+    .pf-download p {
+      font-size: 0.9rem;
+      color: var(--color-text-mid);
+    }
+
+    /* Slides gallery */
+    .pf-gallery {
+      padding: 5rem 4rem;
+      background: var(--color-white);
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .pf-slide {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-medium);
+      border: 1px solid rgba(94, 207, 191, 0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: zoom-in;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease, box-shadow 0.3s ease;
+    }
+
+    .pf-slide.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .pf-slide:hover {
+      box-shadow: var(--shadow-strong);
+      transform: translateY(-4px) scale(1.002);
+    }
+
+    .pf-slide img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 46, 43, 0.95);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.is-open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lightbox__img {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: var(--radius-md);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+      object-fit: contain;
+    }
+
+    .lightbox__close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--color-white);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+
+    .lightbox__close:hover { background: rgba(255,255,255,0.2); }
+
+    .lightbox__prev,
+    .lightbox__next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--color-white);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+
+    .lightbox__prev { left: 1.5rem; }
+    .lightbox__next { right: 1.5rem; }
+    .lightbox__prev:hover,
+    .lightbox__next:hover { background: rgba(255,255,255,0.2); }
+
+    .lightbox__counter {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.1em;
+    }
+
+    /* Footer CTA */
+    .pf-footer-cta {
+      padding: 5rem 4rem;
+      background: var(--color-aqua-pale);
+      text-align: center;
+    }
+
+    .pf-footer-cta h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 300;
+      color: var(--color-text);
+      margin-bottom: 1rem;
+    }
+
+    .pf-footer-cta h2 em {
+      font-style: italic;
+      color: var(--color-aqua-dark);
+    }
+
+    .pf-footer-cta p {
+      color: var(--color-text-mid);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .pf-footer-cta__links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .pf-nav { padding: 1.2rem 1.5rem; }
+      .pf-hero { padding: 8rem 1.5rem 3rem; }
+      .pf-download { padding: 1.2rem 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
+      .pf-gallery { padding: 3rem 1.5rem; gap: 1.5rem; }
+      .pf-footer-cta { padding: 4rem 1.5rem; }
+      .lightbox__prev { left: 0.5rem; }
+      .lightbox__next { right: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header>
+    <nav class="pf-nav" aria-label="Navegación">
+      <a href="index.html" class="pf-nav__logo">Agustina Zubeldia.</a>
+      <a href="index.html" class="pf-nav__back">← Volver al inicio</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="pf-hero">
+      <span class="pf-hero__eyebrow">Trabajos seleccionados</span>
+      <h1 class="pf-hero__title">Social Media<br><em>Portfolio</em></h1>
+      <p class="pf-hero__desc">
+        Una selección de proyectos en community management, copywriting,
+        social listening y estrategia de contenidos.
+      </p>
+    </section>
+
+    <!-- DOWNLOAD BAR -->
+    <div class="pf-download">
+      <p>¿Preferís verlo en PDF?</p>
+      <a href="assets/portfolio.pdf" download class="btn btn--outline">
+        ⬇ Descargar portfolio
+      </a>
+    </div>
+
+    <!-- SLIDES GALLERY -->
+    <div class="pf-gallery" role="list" aria-label="Slides del portfolio">
+      <div class="pf-slide reveal" data-index="0" role="listitem">
+        <img src="assets/slide1.jpg" alt="Portfolio Agustina Zubeldia — slide 1" loading="eager" />
+      </div>
+      <div class="pf-slide reveal" data-index="1" role="listitem">
+        <img src="assets/slide2.jpg" alt="Portfolio Agustina Zubeldia — slide 2" loading="lazy" />
+      </div>
+      <div class="pf-slide reveal" data-index="2" role="listitem">
+        <img src="assets/slide3.jpg" alt="Portfolio Agustina Zubeldia — slide 3" loading="lazy" />
+      </div>
+      <div class="pf-slide reveal" data-index="3" role="listitem">
+        <img src="assets/slide4.jpg" alt="Portfolio Agustina Zubeldia — slide 4" loading="lazy" />
+      </div>
+      <div class="pf-slide reveal" data-index="4" role="listitem">
+        <img src="assets/slide5.jpg" alt="Portfolio Agustina Zubeldia — slide 5" loading="lazy" />
+      </div>
+      <div class="pf-slide reveal" data-index="5" role="listitem">
+        <img src="assets/slide6.jpg" alt="Portfolio Agustina Zubeldia — slide 6" loading="lazy" />
+      </div>
+      <div class="pf-slide reveal" data-index="6" role="listitem">
+        <img src="assets/slide7.jpg" alt="Portfolio Agustina Zubeldia — slide 7" loading="lazy" />
+      </div>
+      <div class="pf-slide reveal" data-index="7" role="listitem">
+        <img src="assets/slide8.jpg" alt="Portfolio Agustina Zubeldia — slide 8" loading="lazy" />
+      </div>
+    </div>
+
+    <!-- FOOTER CTA -->
+    <section class="pf-footer-cta">
+      <h2>¿Te gustó lo que <em>viste</em>?</h2>
+      <p>Estoy disponible para nuevos proyectos. Escribime y hablamos.</p>
+      <div class="pf-footer-cta__links">
+        <a href="mailto:zubeldiagustina@gmail.com" class="btn btn--primary">
+          zubeldiagustina@gmail.com
+        </a>
+        <a href="index.html#contact" class="btn btn--outline">
+          Volver al inicio
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Vista ampliada">
+    <button class="lightbox__close" id="lbClose" aria-label="Cerrar">✕</button>
+    <button class="lightbox__prev"  id="lbPrev"  aria-label="Anterior">‹</button>
+    <img class="lightbox__img" id="lbImg" src="" alt="" />
+    <button class="lightbox__next"  id="lbNext"  aria-label="Siguiente">›</button>
+    <span class="lightbox__counter" id="lbCounter"></span>
+  </div>
+
+  <script>
+    'use strict';
+
+    /* ── Scroll reveal ── */
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver(
+      (entries) => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          revealObs.unobserve(e.target);
+        }
+      }),
+      { threshold: 0.08 }
+    );
+    revealEls.forEach(el => revealObs.observe(el));
+
+    /* ── Lightbox ── */
+    const slides    = document.querySelectorAll('.pf-slide');
+    const lightbox  = document.getElementById('lightbox');
+    const lbImg     = document.getElementById('lbImg');
+    const lbClose   = document.getElementById('lbClose');
+    const lbPrev    = document.getElementById('lbPrev');
+    const lbNext    = document.getElementById('lbNext');
+    const lbCounter = document.getElementById('lbCounter');
+
+    let currentIndex = 0;
+    const total = slides.length;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      const img = slides[index].querySelector('img');
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lbCounter.textContent = `${index + 1} / ${total}`;
+      lightbox.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + total) % total;
+      openLightbox(currentIndex);
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % total;
+      openLightbox(currentIndex);
+    }
+
+    slides.forEach((slide, i) => {
+      slide.addEventListener('click', () => openLightbox(i));
+    });
+
+    lbClose.addEventListener('click', closeLightbox);
+    lbPrev.addEventListener('click', showPrev);
+    lbNext.addEventListener('click', showNext);
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('is-open')) return;
+      if (e.key === 'Escape')     closeLightbox();
+      if (e.key === 'ArrowLeft')  showPrev();
+      if (e.key === 'ArrowRight') showNext();
+    });
+  </script>
+
+</body>
+</html>
