@@ -1043,7 +1043,9 @@ ul {
     grid-template-columns: 1fr;
     padding: 5rem 1.5rem;
     gap: 3rem;
+  
   }
+
 
   /* Experience */
   .experience { padding: 5rem 1.5rem; }
@@ -1084,4 +1086,15 @@ ul {
     text-align: center;
     padding: 1.5rem;
   }
+
+  /* Cursor y scroll hint */
+  .cursor,
+  .cursor-ring {
+    display: none;
+  }
+
+  .scroll-hint {
+    display: none;
+  }
 }
+
